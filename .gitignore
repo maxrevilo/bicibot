@@ -11,3 +11,17 @@
 *.lai
 *.la
 *.a
+
+
+desktop.ini
+*.sublime-project
+*.sublime-workspace
+
+
+#####
+# OS X temporary files that should never be committed
+.DS_Store
+.Trashes
+*.swp
+*.lock
+*~.nib
