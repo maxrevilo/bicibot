@@ -19,11 +19,11 @@ void print_accel(Task* me);
 Task accel_update(1000, print_accel);
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println("Initiating...");
 
     power.begin();
-    actuators.begin(&power);
+    actuators.begin();
     
     //accelero.begin(13, 12, 7, 4, A2, A1, A0);
     //accelero.calibrate();

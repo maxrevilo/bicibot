@@ -13,8 +13,8 @@ extern const int OK_LED;
 extern const int HEAD_SERVO;
 extern const int RIGHT_SERVO;
 extern const int LEFT_SERVO;
-extern const int RIGHT_FEEDBACK;
-extern const int LEFT_FEEDBACK;
+#define RIGHT_FEEDBACK A4
+#define LEFT_FEEDBACK  A5
 
 extern const int MIN_MU_SERVO;
 extern const int MAX_MU_SERVO;
