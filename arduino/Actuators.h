@@ -13,12 +13,14 @@ class Actuators {
         int getRightPosition();
         int getLeftPosition();
 
+        void test_feedback_limits();
+        void set_MU_limits();
+
     private:
         Servo _head_act;
         Servo _right_act;
         Servo _left_act;
 
-        void _test_feedback_limits();
         //Actuators actual voltage positions
         int _head_pos;
         int _right_pos;
@@ -42,7 +44,8 @@ class Actuators {
 
         static void _fun_task(Task* task);
         BTask _task;
-        int _dest_ang;
+        int _dest_right_ang;
+        int _dest_left_ang;
         int _dest_pos;
         char _ang_dir;
 
