@@ -13,9 +13,6 @@ Actuators::Actuators():
 }
 
 void Actuators::begin() {
-    test_feedback_limits();
-    set_MU_limits();
-
     _head_act.attach(HEAD_SERVO);
     _right_act.attach(RIGHT_SERVO);
     _left_act.attach(LEFT_SERVO);
@@ -32,6 +29,11 @@ void Actuators::begin() {
     _left_act.writeMicroseconds(_dest_left_ang);
 
     SoftTimer.add(&_task);
+}
+
+void Actuators::calibrate() {
+    test_feedback_limits();
+    set_MU_limits();
 }
 
 

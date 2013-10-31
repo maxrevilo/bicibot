@@ -8,6 +8,7 @@ class Actuators {
     public:
         Actuators();
         void begin();
+        void calibrate();
 
         int getHeadPosition();
         int getRightPosition();

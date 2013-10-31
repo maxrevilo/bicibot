@@ -23,11 +23,13 @@ void setup() {
     Serial.println("Initiating...");
 
     power.begin();
-    actuators.begin();
     
-    //accelero.begin(13, 12, 7, 4, A2, A1, A0);
-    //accelero.calibrate();
-    //SoftTimer.add(&accel_update);
+    accelero.begin(13, 12, 7, 4, A2, A1, A0);
+    accelero.calibrate();
+    SoftTimer.add(&accel_update);
+    
+    actuators.calibrate();
+    actuators.begin();
     
     Serial.println("Initiated");
     power.turn_on();
@@ -46,10 +48,8 @@ void print_accel(Task* me)
     Serial.print(z);
     Serial.println("\tG*10^-2");
 
-    Serial.print("Right: ");
-    Serial.print(actuators.getRightPosition());
-    Serial.print(" \tLeft: ");
-    Serial.println(actuators.getLeftPosition());
+    //actuators.getRightPosition();
+    //actuators.getLeftPosition();
 }
 
 
