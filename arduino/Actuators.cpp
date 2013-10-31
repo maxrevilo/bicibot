@@ -50,6 +50,17 @@ int Actuators::getLeftPosition(){
 }
 
 
+// pos va de -1000 a 1000, donde -1000 es grado 0 y 1000 es grado 180. 
+void Actuators::moveHead(int pos) {
+    unsigned long int Aux;
+    unsigned int MU;
+    Aux = (pos + 1000);
+    Aux = Aux * (MAX_MU_SERVO - MIN_MU_SERVO);
+    MU = Aux/2000 + MIN_MU_SERVO;
+    _head_act.writeMicroseconds(MU);
+}
+
+
 /* Se prueban los valores máximos y mínimos del voltage del feedback
  * para hacer un mapeado con los MU de los servos.
  */

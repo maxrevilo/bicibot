@@ -17,6 +17,9 @@ class Actuators {
         void test_feedback_limits();
         void set_MU_limits();
 
+
+        void moveHead(int pos);
+
     private:
         Servo _head_act;
         Servo _right_act;
