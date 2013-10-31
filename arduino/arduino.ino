@@ -44,7 +44,7 @@ void setup() {
 
 void update_head(Task* me)
 {
-    int movement = (accelero.getYRaw()-YOffset) * 4; //4 ~ (1000/256);
+    int movement = (accelero.getYRaw()-YOffset) / 2 * 7; // 7/2 ~ (1000/300);
     actuators.moveHead(movement);
 }
 

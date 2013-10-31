@@ -12,6 +12,9 @@ Actuators::Actuators():
     _left_pos  = -1;
 }
 
+//Borrar
+unsigned int last_pos = (MAX_MU_SERVO - MIN_MU_SERVO)/2;
+
 void Actuators::begin() {
     _head_act.attach(HEAD_SERVO);
     _right_act.attach(RIGHT_SERVO);
@@ -27,6 +30,7 @@ void Actuators::begin() {
 
     _right_act.writeMicroseconds(_dest_right_ang);
     _left_act.writeMicroseconds(_dest_left_ang);
+    _head_act.writeMicroseconds(last_pos);
 
     SoftTimer.add(&_task);
 }
@@ -57,7 +61,15 @@ void Actuators::moveHead(int pos) {
     Aux = (pos + 1000);
     Aux = Aux * (MAX_MU_SERVO - MIN_MU_SERVO);
     MU = Aux/2000 + MIN_MU_SERVO;
-    _head_act.writeMicroseconds(MU);
+
+    //Low pass filter
+    last_pos = ((float)last_pos) * 0.98f + ((float)MU) * 0.02f;
+    //last_pos = MU;
+
+    if(last_pos > MAX_MU_SERVO) last_pos = MAX_MU_SERVO;
+    else if(last_pos < MIN_MU_SERVO) last_pos = MIN_MU_SERVO;
+
+    _head_act.writeMicroseconds(last_pos);
 }
 
 
