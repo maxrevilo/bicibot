@@ -1,11 +1,14 @@
 #include "consts.h"
 #include <Arduino.h>
 #include <Servo.h>
+#include <EEPROM.h>
 #include <SoftTimer.h>
+#include "Settings.h"
 #include "AcceleroMMA7361.h"
 #include "Power.h"
 #include "Actuators.h"
 
+Settings settings;
 
 AcceleroMMA7361 accelero;
 int x, y ,z;
@@ -27,16 +30,18 @@ void setup() {
     Serial.begin(115200);
     Serial.println("Initiating...");
 
-    power.begin();
+    //settings.load();
+
+    power.begin(&settings);
     
     accelero.begin(13, 12, 7, 4, A2, A1, A0);
     accelero.calibrate();
     YOffset = accelero.getYRaw();
-    SoftTimer.add(&accel_update);
+    //SoftTimer.add(&accel_update);
     SoftTimer.add(&accel_head);
     
-    //actuators.calibrate();
-    actuators.begin();
+    actuators.calibrate();
+    actuators.begin(&settings);
     
     Serial.println("Initiated");
     power.turn_on();

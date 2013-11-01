@@ -15,7 +15,9 @@ Actuators::Actuators():
 //Borrar
 unsigned int last_pos = (MAX_MU_SERVO - MIN_MU_SERVO)/2;
 
-void Actuators::begin() {
+void Actuators::begin(Settings *settings) {
+    this->settings = settings;
+
     _head_act.attach(HEAD_SERVO);
     _right_act.attach(RIGHT_SERVO);
     _left_act.attach(LEFT_SERVO);

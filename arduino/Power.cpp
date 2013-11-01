@@ -19,7 +19,7 @@ Power::Power():
 }
 
 
-void Power::begin() {
+void Power::begin(Settings *settings) {
     pinMode(OK_LED, OUTPUT);
 
     //Ok Led callbacks
