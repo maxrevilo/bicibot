@@ -2,12 +2,13 @@
 #define Power_h
 #include <Arduino.h>
 #include "BTask.h"
+#include "Settings.h"
 
-class Power {
+struct Power {
     public:
         /// constructor
         Power();
-        void begin();
+        void begin(Settings *settings);
 
         //Getters
         void turn_on();

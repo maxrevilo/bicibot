@@ -3,11 +3,12 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include "BTask.h"
+#include "Settings.h"
 
-class Actuators {
+struct Actuators {
     public:
         Actuators();
-        void begin();
+        void begin(Settings *settings);
         void calibrate();
 
         int getHeadPosition();
@@ -24,6 +25,8 @@ class Actuators {
         Servo _head_act;
         Servo _right_act;
         Servo _left_act;
+
+        Settings *settings;
 
         //Actuators actual voltage positions
         int _head_pos;
@@ -52,7 +55,6 @@ class Actuators {
         int _dest_left_ang;
         int _dest_pos;
         char _ang_dir;
-
 
 };
 
