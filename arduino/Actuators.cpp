@@ -164,34 +164,61 @@ void Actuators::set_MU_limits() {
  * actualizar la posición de las piernas segun una función sinusoidal.
  * Con el feedback de los servos se mantienen sincronizadas al mismo ritmo.
  */
+// void Actuators::_fun_task(Task* task) {
+//     Actuators *self = (Actuators *) ((BTask *) task)->getContext();
+
+//     self->_right_pos = analogReadProm(RIGHT_FEEDBACK, 3, 5);
+//     self->_left_pos = analogReadProm(LEFT_FEEDBACK, 3, 5);
+
+//     // Serial.print("Left: ");
+//     // Serial.print(self->getLeftPosition());
+//     // Serial.print(", dest: ");
+//     // Serial.println(self->getLeftPosition());
+
+//     if(abs(self->getRightPosition() - self->_dest_right_ang) > 100) return;
+//     if(abs(self->getLeftPosition() - self->_dest_left_ang) > 100) return;
+
+//     if(self->_dest_pos > 5000) {
+//         self->_ang_dir = -3;
+//     }
+//     if(self->_dest_pos < 0) {
+//         self->_ang_dir = 3;
+//     }
+
+//     self->_dest_pos += self->_ang_dir;
+//     float fpos = (float) self->_dest_pos;
+//     float sin_factor = (sin( fpos * MATH_TWO_PI / 5000.0 - MATH_HALF_PI ) + 1.0) * 0.5;
+
+//     self->_dest_right_ang = (int)( sin_factor * (self->_right_max_MU - self->_right_min_MU) ) + self->_right_min_MU;
+//     self->_dest_left_ang = (int)( sin_factor * (self->_left_max_MU - self->_left_min_MU) ) + self->_left_min_MU;
+
+//     self->_right_act.writeMicroseconds(self->_dest_right_ang);
+//     self->_left_act.writeMicroseconds(self->_dest_left_ang);
+// }
+
 void Actuators::_fun_task(Task* task) {
     Actuators *self = (Actuators *) ((BTask *) task)->getContext();
 
     self->_right_pos = analogReadProm(RIGHT_FEEDBACK, 3, 5);
     self->_left_pos = analogReadProm(LEFT_FEEDBACK, 3, 5);
 
-    // Serial.print("Left: ");
-    // Serial.print(self->getLeftPosition());
-    // Serial.print(", dest: ");
-    // Serial.println(self->getLeftPosition());
-
-    if(abs(self->getRightPosition() - self->_dest_right_ang) > 100) return;
-    if(abs(self->getLeftPosition() - self->_dest_left_ang) > 100) return;
-
-    if(self->_dest_pos > 5000) {
-        self->_ang_dir = -3;
-    }
-    if(self->_dest_pos < 0) {
-        self->_ang_dir = 3;
-    }
-
-    self->_dest_pos += self->_ang_dir;
-    float fpos = (float) self->_dest_pos;
-    float sin_factor = (sin( fpos * MATH_TWO_PI / 5000.0 - MATH_HALF_PI ) + 1.0) * 0.5;
-
-    self->_dest_right_ang = (int)( sin_factor * (self->_right_max_MU - self->_right_min_MU) ) + self->_right_min_MU;
-    self->_dest_left_ang = (int)( sin_factor * (self->_left_max_MU - self->_left_min_MU) ) + self->_left_min_MU;
-
     self->_right_act.writeMicroseconds(self->_dest_right_ang);
     self->_left_act.writeMicroseconds(self->_dest_left_ang);
+
+    if(abs(self->getRightPosition() - self->_dest_right_ang) > 60) return;
+    if(abs(self->getLeftPosition() - self->_dest_left_ang) > 60) return;
+
+    if(self->_dest_right_ang == self->_right_max_MU) {
+        self->_dest_right_ang = self->_right_min_MU;
+        self->_dest_left_ang = self->_right_min_MU;
+    } else {
+        self->_dest_right_ang = self->_right_max_MU;
+        self->_dest_left_ang = self->_right_max_MU;
+    }
+
+    self->_right_act.detach();
+    self->_left_act.detach();
+    delay(300);
+    self->_right_act.attach(RIGHT_SERVO);
+    self->_left_act.attach(LEFT_SERVO);
 }
