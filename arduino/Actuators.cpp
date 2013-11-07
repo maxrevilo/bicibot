@@ -118,28 +118,32 @@ void Actuators::set_MU_limits() {
     _right_act.detach();
     _left_act.detach();
 
+    delay(3000);
     Serial.println("Set min servo position (and press \"a\" key when finished)");
-    while(Serial.available()==0 || Serial.read() != 'a') {
-        _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
-        _right_min_MU = getRightPosition();
+    while(digitalRead(3) == LOW && (Serial.available()==0 || Serial.read() != 'a'))
 
-        _left_pos = analogReadProm(LEFT_FEEDBACK, 10, 50);
-        _left_min_MU = getLeftPosition();
-    }
+    _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
+    _right_min_MU = getRightPosition();
+
+    _left_pos = analogReadProm(LEFT_FEEDBACK, 10, 50);
+    _left_min_MU = getLeftPosition();
+
     Serial.print("Servos Min MU <Right: ");
     Serial.print(_right_min_MU);
     Serial.print(",\tLeft: ");
     Serial.print(_left_min_MU);
     Serial.println(">");
 
+    delay(3000);
     Serial.println("Set max servo position (and press \"a\" key when finished)");
-    while(Serial.available()==0 || Serial.read() != 'a') {
-        _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
-        _right_max_MU = getRightPosition();
+    while(digitalRead(3) == LOW && (Serial.available()==0 || Serial.read() != 'a'));
 
-        _left_pos = analogReadProm(LEFT_FEEDBACK, 10, 50);
-        _left_max_MU = getLeftPosition();
-    }
+    _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
+    _right_max_MU = getRightPosition();
+
+    _left_pos = analogReadProm(LEFT_FEEDBACK, 10, 50);
+    _left_max_MU = getLeftPosition();
+
     Serial.print("Servos Max MU <Right: ");
     Serial.print(_right_max_MU);
     Serial.print(",\tLeft: ");

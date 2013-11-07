@@ -21,6 +21,7 @@ Power::Power():
 
 void Power::begin(Settings *settings) {
     pinMode(OK_LED, OUTPUT);
+    digitalWrite(OK_LED, HIGH);
 
     //Ok Led callbacks
     SoftTimer.add(&_taskOnOff);
