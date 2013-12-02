@@ -214,10 +214,10 @@ void Actuators::_fun_task(Task* task) {
 
     if(self->_dest_right_ang == self->_right_max_MU) {
         self->_dest_right_ang = self->_right_min_MU;
-        self->_dest_left_ang = self->_right_min_MU;
+        self->_dest_left_ang = self->_left_min_MU;
     } else {
         self->_dest_right_ang = self->_right_max_MU;
-        self->_dest_left_ang = self->_right_max_MU;
+        self->_dest_left_ang = self->_left_max_MU;
     }
 
     self->_right_act.detach();
