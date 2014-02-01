@@ -12,8 +12,6 @@ Settings settings;
 
 AcceleroMMA7361 accelero;
 int x, y ,z;
-int pos = 0;
-int dir = 1;
 
 Power power;
 Actuators actuators;
