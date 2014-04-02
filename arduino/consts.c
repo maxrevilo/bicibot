@@ -5,7 +5,8 @@ const float MATH_PI = 3.14159265359;
 const float MATH_TWO_PI = 6.28318530718;
 const float MATH_HALF_PI = 1.57079632679;
 
-const int OK_LED = 2;
+const int OK_LED = 8;
+const int BUTTON_PIN = 2;
 
 const int HEAD_SERVO  = 9;
 const int RIGHT_SERVO = 10;

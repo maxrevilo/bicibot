@@ -8,6 +8,7 @@ extern const float MATH_HALF_PI;
 
 //UI
 extern const int OK_LED;
+extern const int BUTTON_PIN;
 
 //Actuators
 extern const int HEAD_SERVO;

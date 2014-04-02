@@ -6,17 +6,18 @@
 
 AcceleroMMA7361 accelero;
 int x, y ,z;
-int dx, dy ,dz;
+//int dx, dy ,dz;
 
 void fun_print_accel(Task* me);
 Task task_print_accel(100, fun_print_accel);
 
+int xPin = A5, yPin = A4, zPin = A3;
 
 void setup() {
     Serial.begin(115200);
     Serial.println("Initiating...");
     
-    accelero.begin(13, 12, 7, 2, A2, A1, A0);
+    accelero.begin(13, 12, 7, 2, xPin, yPin, zPin);
 
     /*
     accelero.calibrate();
@@ -36,12 +37,12 @@ void setup() {
 
 void fun_print_accel(Task* me)
 {
-    // x = dx + accelero.getXVolt();
-    // y = dy + accelero.getYVolt();
-    // z = dz + accelero.getZVolt();
-    x = (100 * (analogRead(A2) - 550)) / 250;
-    y = (100 * (analogRead(A1) - 580)) / 250;
-    z = (100 * (analogRead(A0) - 460)) / 256;
+    x = (analogRead(xPin));
+    y = (analogRead(yPin));
+    z = (analogRead(zPin));
+    //x = (100 * (analogRead(xPin) - 506)) / 64;
+    //y = (100 * (analogRead(yPin) - 524)) / 64;
+    //z = (100 * (analogRead(zPin) - 539)) / 64;
     /*
     Serial.print("x: ");
     Serial.print(x);

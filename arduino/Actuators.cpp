@@ -120,7 +120,7 @@ void Actuators::set_MU_limits() {
 
     delay(3000);
     Serial.println("Set min servo position (and press \"a\" key when finished)");
-    while(digitalRead(3) == LOW && (Serial.available()==0 || Serial.read() != 'a'))
+    while(digitalRead(BUTTON_PIN) == LOW && (Serial.available()==0 || Serial.read() != 'a'))
 
     _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
     _right_min_MU = getRightPosition();
@@ -136,7 +136,7 @@ void Actuators::set_MU_limits() {
 
     delay(3000);
     Serial.println("Set max servo position (and press \"a\" key when finished)");
-    while(digitalRead(3) == LOW && (Serial.available()==0 || Serial.read() != 'a'));
+    while(digitalRead(BUTTON_PIN) == LOW && (Serial.available()==0 || Serial.read() != 'a'));
 
     _right_pos = analogReadProm(RIGHT_FEEDBACK, 10, 50);
     _right_max_MU = getRightPosition();
