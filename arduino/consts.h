@@ -15,7 +15,7 @@ extern const int HEAD_SERVO;
 extern const int RIGHT_SERVO;
 extern const int LEFT_SERVO;
 #define RIGHT_FEEDBACK A4
-#define LEFT_FEEDBACK  A5
+#define LEFT_FEEDBACK  A3
 
 extern const int MIN_MU_SERVO;
 extern const int MAX_MU_SERVO;

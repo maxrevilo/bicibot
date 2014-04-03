@@ -11,7 +11,7 @@ int x, y ,z;
 void fun_print_accel(Task* me);
 Task task_print_accel(100, fun_print_accel);
 
-int xPin = A5, yPin = A4, zPin = A3;
+int xPin = A2, yPin = A1, zPin = A0;
 
 void setup() {
     Serial.begin(115200);
@@ -37,23 +37,18 @@ void setup() {
 
 void fun_print_accel(Task* me)
 {
-    x = (analogRead(xPin));
-    y = (analogRead(yPin));
-    z = (analogRead(zPin));
-    //x = (100 * (analogRead(xPin) - 506)) / 64;
-    //y = (100 * (analogRead(yPin) - 524)) / 64;
-    //z = (100 * (analogRead(zPin) - 539)) / 64;
-    /*
-    Serial.print("x: ");
-    Serial.print(x);
-    Serial.print(" \ty: ");
-    Serial.print(y);
-    Serial.print(" \tz: ");
-    Serial.print(z);
-    Serial.print(" \tM: ");
-    Serial.print(accelero.getTotalVector());
-    Serial.println("\t");
-    */
+    //x = (analogRead(xPin));
+    //y = (analogRead(yPin));
+    //z = (analogRead(zPin));
+    
+    x = analogRead(xPin) -75;
+    y = analogRead(yPin) -78;
+    z = analogRead(zPin) +126;
+
+    x = (30 * (analogRead(xPin) -75  -512)) / 128 * 5 / 4;
+    y = (30 * (analogRead(yPin) -78  -512)) / 128 * 5 / 4;
+    z = (30 * (analogRead(zPin) +126  -512)) / 128 * 5 / 4;
+
     Serial.print(x);
     Serial.print(",");
     Serial.print(y);

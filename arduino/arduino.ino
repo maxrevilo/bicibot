@@ -38,8 +38,8 @@ void setup() {
     //SoftTimer.add(&accel_update);
     SoftTimer.add(&accel_head);
     
-    actuators.calibrate();
-    actuators.begin(&settings);
+    //actuators.calibrate();
+    //actuators.begin(&settings);
     
     Serial.println("Initiated");
     power.turn_on();
